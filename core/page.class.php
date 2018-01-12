@@ -18,9 +18,9 @@ class page
 
     $module = module::selfread();
     if ($module != null) {
-      echo '<title>'.rb::get('core.name').' - '.rb::get($module->id.'.name').'</title>';
+      echo '<title>'.NAME.' - '.rb::get($module->id.'.name').'</title>';
     } else {
-      echo '<title>'.rb::get('core.name').'</title>';
+      echo '<title>'.NAME.'</title>';
     }
     
     echo '<link rel="icon" type="image/x-icon" href="'.CONTEXT.'/favicon.ico" />';
