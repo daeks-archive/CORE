@@ -3,6 +3,7 @@
 class module
 {
   private static $config = 'config.json';
+  private static $cache = 3;
 
   public static function read($submodule = true)
   {
@@ -19,7 +20,7 @@ class module
         return json_decode(cache::read('module'));
       } else {
         $tmp = module::reload($submodule);
-        cache::write('module', json_encode($tmp));
+        cache::write('module', json_encode($tmp), module::$cache);
         return $tmp;
       }
     }

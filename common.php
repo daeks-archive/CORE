@@ -1,11 +1,13 @@
 <?php
-  if (file_exists(dirname(dirname(realpath(__FILE__))).DIRECTORY_SEPARATOR.'config.php')) {
-    require_once(dirname(dirname(realpath(__FILE__))).DIRECTORY_SEPARATOR.'config.php');
+  if (file_exists(common::config())) {
+    require_once(common::config());
   }
    
   common::construct();
   class common
   {
+    private static $cache = 60;
+  
     public static function construct()
     {
       set_exception_handler(array('common', 'errorhandler'));
@@ -29,7 +31,7 @@
       if (!defined('DEBUG')) {
         define('DEBUG', false);
       }
-      
+     
       common::load(CORE.DIRECTORY_SEPARATOR.'include');
       common::load(CORE.DIRECTORY_SEPARATOR.'database');
       common::load(CORE.DIRECTORY_SEPARATOR.'security');
@@ -42,12 +44,9 @@
         common::load($module->path);
       }
       
+      common::defaults();
       session::construct();
       db::instance()->construct();
-      
-      if (!defined('NAME')) {
-        define('NAME', rb::get('core.name'));
-      }
     }
     
     public static function load($path)
@@ -86,6 +85,38 @@
       } else {
         include($target);
       }
+    }
+    
+    public static function defaults()
+    {
+      if (!defined('NAME')) {
+        define('NAME', rb::get('core.name'));
+      }
+      if (!defined('NAME')) {
+        define('NAME', cache::read('NAME'));
+      } else {
+        cache::write('NAME', NAME, common::$cache);
+      }
+      if (!defined('BRAND')) {
+        define('BRAND', cache::read('BRAND'));
+      } else {
+        cache::write('BRAND', BRAND, common::$cache);
+      }
+      if (!defined('DATABASE')) {
+        define('DATABASE', cache::read('DATABASE'));
+      } else {
+        cache::write('DATABASE', DATABASE, common::$cache);
+      }
+      if (!defined('SECURITY')) {
+        define('SECURITY', cache::read('SECURITY'));
+      } else {
+        cache::write('SECURITY', SECURITY, common::$cache);
+      }
+    }
+    
+    public static function config()
+    {
+      return dirname(dirname(realpath(__FILE__))).DIRECTORY_SEPARATOR.'config.php';
     }
     
     public static function errorhandler($ex)
