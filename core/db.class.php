@@ -6,7 +6,7 @@ class db
   
   public function construct()
   {
-  
+    return false;
   }
   
   public function ping()
