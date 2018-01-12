@@ -1,0 +1,17 @@
+language: php 
+
+php:
+  - 5.6
+
+notifications:
+  email: false
+
+install:
+  - composer install --prefer-dist --verbose
+
+script:
+  - ./vendor/bin/phpcs ./
+      --standard=ruleset.xml
+      --ignore="vendor/*,core/js/*,core/css/*,core/inc/*"
+      --colors
+      --extensions=php,js,css

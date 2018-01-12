@@ -1,0 +1,17 @@
+{
+  "name" : "D-Network",
+  "loading" : "Loading...",
+  "login" : "Sign in",
+  "login_with" : "Sign in through {0} {1}",
+  "logout" : "Logout",
+  "mobile_not_supported" : "Mobile devices are currently not supported.</b><br>Please use a larger screen environment.",
+  "tablets_not_supported" : "Tablet devices are currently not supported.</b><br>Please use a larger screen environment.",
+  "footer" : "(c) {0} daeks - generated in {1}s - queried in {2}s",
+  "async" : "- queried in {0}s",
+  "close" : "Close",
+  "error" : "Error",
+  "invalid_action" : "Invalid action - {0}",
+  "username": "Username:",
+  "password": "Password:",
+  "invalid_login": "Login failed. Invalid credentials."
+}

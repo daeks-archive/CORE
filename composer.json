@@ -1,0 +1,7 @@
+{
+  "require":
+  {
+    "phing/phing": "2.*",
+    "squizlabs/php_codesniffer": "*"
+  }
+}

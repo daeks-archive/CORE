@@ -1,0 +1,15 @@
+{
+  "name" : "Setup",
+  "title" : "Website Setup",
+  "ok" : "Ok",
+  "writable" : "{0} needs to be writable.",
+  "database" : "Please provide your MySQL database details",
+  "database_host" : "MySQL database hostname (ex. localhost)",
+  "database_name" : "MySQL database name",
+  "database_user" : "MySQL database user",
+  "database_pwd" : "MySQL database password",
+  "table_prefix" : "MySQL table prefix",
+  "success" : "Successfully installed",
+  "retry" : "Retry",
+  "invalid_connection" : "Database connection can not be established."
+}
