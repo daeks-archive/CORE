@@ -8,6 +8,7 @@ if (network::get('action') != '') {
       network::success(''.!db::instance()->ping());
       break;
     case 'setup':
+      define('DATABASE', network::post('database_provider'));
       define('DATABASE_HOST', network::post('database_host'));
       define('DATABASE_NAME', network::post('database_name'));
       define('DATABASE_USER', network::post('database_user'));
