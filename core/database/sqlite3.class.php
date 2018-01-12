@@ -2,6 +2,7 @@
 
 class sqlite3 implements database_interface
 {
+  public static $jdb = 'JDB';
   private $jdb = '.jdb';
   private $sdb = '.sdb';
   
@@ -14,8 +15,10 @@ class sqlite3 implements database_interface
   
   public function construct()
   {
-    foreach (array_slice(scandir(DB), 2) as $item) {
-      $this->setup(pathinfo($item, PATHINFO_FILENAME));
+    foreach (array_slice(scandir(DATA), 2) as $item) {
+      if (strtoupper(pathinfo($item, PATHINFO_EXTENSION)) == sqlite3::$jdb) {
+        $this->setup(pathinfo($item, PATHINFO_FILENAME));
+      }
     }
   }
   
@@ -50,7 +53,7 @@ class sqlite3 implements database_interface
     return $this->handle->quote($value);
   }
   
-  public function read($module, $where = null, $replace = array())
+  public function read($module, $fields = '*', $conditions = null, $options = array())
   {
     $needle = array('%USER%');
     $default_user = get_current_user();
@@ -59,17 +62,17 @@ class sqlite3 implements database_interface
     }
     $haystack = array($default_user);
     
-    foreach ($replace as $key => $value) {
+    foreach ($options as $key => $value) {
       array_push($needle, $key);
       array_push($haystack, $value);
     }
     
     if ($this->handle->query('SELECT 1 FROM '.$module)) {
       $stmt = null;
-      if ($where != null) {
-        $stmt = $this->handle->query('SELECT * FROM '.$module.' WHERE '.$where, PDO::FETCH_ASSOC);
+      if ($conditions != null) {
+        $stmt = $this->handle->query('SELECT '.$fields.' FROM '.$module.' WHERE '.$conditions, PDO::FETCH_ASSOC);
       } else {
-        $stmt = $this->handle->query('SELECT * FROM '.$module, PDO::FETCH_ASSOC);
+        $stmt = $this->handle->query('SELECT '.$fields.' FROM '.$module, PDO::FETCH_ASSOC);
       }
       $output = array();
       foreach ($stmt->fetchAll() as $item) {

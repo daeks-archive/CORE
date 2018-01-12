@@ -95,9 +95,9 @@ class topbar
     }
     
     if (strlen($_SERVER['QUERY_STRING']) == 0) {
-      $_SERVER['REQUEST_URI'] .= '?logout';
+      $_SERVER['REQUEST_URI'] .= '?security-logout';
     } else {
-      $_SERVER['REQUEST_URI'] .= '&logout';
+      $_SERVER['REQUEST_URI'] .= '&security-logout';
     }
     echo '<li><a href="'.$_SERVER['REQUEST_URI'].'"><span class="fa navbar-fa fa-sign-out" aria-hidden="true"></span> '.rb::get('core.logout').'</a></li>';
     echo '</ul>';

@@ -1,0 +1,34 @@
+{
+  "version" : 1,
+  "type" : "create",
+  "engine" : "MyISAM",
+  "schema" : [
+    {
+      "name" : "id",
+      "type" : "int not null auto_increment",
+      "primary" : true
+    },
+    {
+      "name" : "username",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "providerid",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "providerurl",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "avatar",
+      "type" : "text"
+    }
+  ],
+  "index" : [
+    {
+      "name" : "providerid",
+      "schema" : [ "providerid" ]
+    }
+  ]
+}
