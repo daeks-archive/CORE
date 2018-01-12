@@ -1,4 +1,2 @@
 cache/*
 !cache/README
-data/*
-!data/README

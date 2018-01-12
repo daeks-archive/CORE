@@ -16,6 +16,11 @@ class mysql implements database_interface
   
   public function construct()
   {
+    foreach (array_slice(scandir(DATA), 2) as $item) {
+      if (strtoupper(pathinfo($item, PATHINFO_EXTENSION)) == mysql::$jdb) {
+        $this->setup(DATA.DIRECTORY_SEPARATOR.$item);
+      }
+    }
     foreach (module::read() as $key => $module) {
       foreach (scandir($module->path) as $include) {
         if (strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == mysql::$jdb) {

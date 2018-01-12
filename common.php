@@ -107,6 +107,11 @@
       } else {
         cache::write('DATABASE', DATABASE, common::$cache);
       }
+      if (!defined('TABLE_PREFIX')) {
+        define('TABLE_PREFIX', cache::read('TABLE_PREFIX'));
+      } else {
+        cache::write('TABLE_PREFIX', TABLE_PREFIX, common::$cache);
+      }
       if (!defined('SECURITY')) {
         define('SECURITY', cache::read('SECURITY'));
       } else {

@@ -2,6 +2,7 @@
 
 class sqlite3 implements database_interface
 {
+  public static $jdb = 'JDB';
   private $jdb = '.jdb';
   private $sdb = '.sdb';
   
@@ -14,8 +15,10 @@ class sqlite3 implements database_interface
   
   public function construct()
   {
-    foreach (array_slice(scandir(DB), 2) as $item) {
-      $this->setup(pathinfo($item, PATHINFO_FILENAME));
+    foreach (array_slice(scandir(DATA), 2) as $item) {
+      if (strtoupper(pathinfo($item, PATHINFO_EXTENSION)) == sqlite3::$jdb) {
+        $this->setup(pathinfo($item, PATHINFO_FILENAME));
+      }
     }
   }
   

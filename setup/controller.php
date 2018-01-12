@@ -15,7 +15,9 @@ if (network::get('action') != '') {
       define('DATABASE_NAME', network::post('database_name'));
       define('DATABASE_USER', network::post('database_user'));
       define('DATABASE_PWD', network::post('database_pwd'));
-      define('TABLE_PREFIX', network::post('table_prefix'));
+      if (!defined('TABLE_PREFIX') && network::post('table_prefix') != '') {
+        define('TABLE_PREFIX', network::post('table_prefix'));
+      }
       
       if (is_writable(BASE) && is_writeable(CACHE) && db::instance()->ping()) {
         $config = '<?php'.PHP_EOL;
@@ -33,7 +35,9 @@ if (network::get('action') != '') {
         $config .= '  define(\'DATABASE_NAME\', \''.network::post('database_name').'\');'.PHP_EOL;
         $config .= '  define(\'DATABASE_USER\', \''.network::post('database_user').'\');'.PHP_EOL;
         $config .= '  define(\'DATABASE_PWD\', \''.network::post('database_pwd').'\');'.PHP_EOL;
-        $config .= '  define(\'TABLE_PREFIX\', \''.network::post('table_prefix').'\');'.PHP_EOL;
+        if (network::post('table_prefix') != '') {
+          $config .= '  define(\'TABLE_PREFIX\', \''.network::post('table_prefix').'\');'.PHP_EOL;
+        }
         if (network::post('security_provider') != '') {
           $config .= '  define(\'SECURITY\', \''.network::post('security_provider').'\');'.PHP_EOL;
         }

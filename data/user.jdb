@@ -1,0 +1,66 @@
+{
+  "version" : 1,
+  "type" : "create",
+  "engine" : "MyISAM",
+  "schema" : [
+    {
+      "name" : "id",
+      "type" : "int not null auto_increment",
+      "primary" : true
+    },
+    {
+      "name" : "steamid",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "personaname",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "lastlogoff",
+      "type" : "int null default '0'"
+    },
+    {
+      "name" : "profileurl",
+      "type" : "varchar (255) not null"
+    },
+    {
+      "name" : "avatar",
+      "type" : "text"
+    },
+    {
+      "name" : "communitybanned",
+      "type" : "varchar (255) null"
+    },
+    {
+      "name" : "vacbanned",
+      "type" : "varchar (255) null"
+    },
+    {
+      "name" : "economyban",
+      "type" : "varchar (255) null"
+    },
+    {
+      "name" : "numberofvacbans",
+      "type" : "int null default '0'"
+    },
+    {
+      "name" : "dayssincelastban",
+      "type" : "int null default '0'"
+    },
+    {
+      "name" : "numberofgamebans",
+      "type" : "int null default '0'"
+    },
+    {
+      "name" : "playtime",
+      "type" : "int null default '0'"
+    }
+  ],
+  "index" : [
+    {
+      "name" : "steamid",
+      "schema" : [ "steamid" ]
+    }
+  ]
+}
