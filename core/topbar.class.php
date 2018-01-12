@@ -34,7 +34,11 @@ class topbar
     
     echo '<div class="navbar navbar-inverse navbar-fixed-top display-xs display-sm display-md display-lg" role="navigation">';
     echo '<div class="navbar-header">';
-    echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'">'.rb::get('core.name').'</a>';
+    if (defined('BRAND') && BRAND != '') {
+      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'"><img style="max-width:30px; margin-top: -7px;" src="'.CONTEXT.URL_SEPARATOR.BRAND.'"> '.NAME.'</a>';
+    } else {
+      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'">'.NAME.'</a>';
+    }
     echo '</div>';
 
     echo '<div class="navbar-left '.page::$devices.'" stlye="display: none!important;">';

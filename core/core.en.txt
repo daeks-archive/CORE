@@ -1,5 +1,4 @@
 {
-  "name" : "D-Network",
   "loading" : "Loading...",
   "login" : "Sign in",
   "login_with" : "Sign in through {0} {1}",
