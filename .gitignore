@@ -1,2 +1,5 @@
 cache/*
 !cache/README
+data/*
+!data/README
+!data/*.jdb
