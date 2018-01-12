@@ -17,12 +17,10 @@ class page
     echo '<head>';
 
     $module = module::selfread();
-    if (defined('NAME')) {
-      if ($module != null) {
-        echo '<title>'.NAME.' - '.rb::get($module->id.'.name').'</title>';
-      } else {
-        echo '<title>'.NAME.'</title>';
-      }
+    if ($module != null) {
+      echo '<title>'.NAME.' - '.rb::get($module->id.'.name').'</title>';
+    } else {
+      echo '<title>'.NAME.'</title>';
     }
     
     echo '<link rel="icon" type="image/x-icon" href="'.CONTEXT.'/favicon.ico" />';

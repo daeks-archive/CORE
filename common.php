@@ -43,6 +43,10 @@
       
       session::construct();
       db::instance()->construct();
+      
+      if (!defined('NAME')) {
+        define('NAME', rb::get('core.name'));
+      }
     }
     
     public static function load($path)
