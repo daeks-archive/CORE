@@ -8,7 +8,9 @@ if (network::get('action') != '') {
       network::success(''.!db::instance()->ping());
       break;
     case 'setup':
-      define('DATABASE', network::post('database_provider'));
+      if (!defined('DATABASE') && network::post('database_provider') != '') {
+        define('DATABASE', network::post('database_provider'));
+      }
       define('DATABASE_HOST', network::post('database_host'));
       define('DATABASE_NAME', network::post('database_name'));
       define('DATABASE_USER', network::post('database_user'));
@@ -17,16 +19,24 @@ if (network::get('action') != '') {
       
       if (is_writable(BASE) && is_writeable(CACHE) && db::instance()->ping()) {
         $config = '<?php'.PHP_EOL;
-        $config .= '  define(\'NAME\', \''.network::post('name').'\');'.PHP_EOL;
-        $config .= '  define(\'BRAND\', \''.network::post('brand').'\');'.PHP_EOL;
+        if (network::post('name') != '') {
+          $config .= '  define(\'NAME\', \''.network::post('name').'\');'.PHP_EOL;
+        }
+        if (network::post('brand') != '') {
+          $config .= '  define(\'BRAND\', \''.network::post('brand').'\');'.PHP_EOL;
+        }
         $config .= '  define(\'APIKEY\', \''.strtoupper(md5(sha1(uniqid().$_SERVER['SERVER_NAME'].microtime()))).'\');'.PHP_EOL;
-        $config .= '  define(\'DATABASE\', \''.network::post('database_provider').'\');'.PHP_EOL;
+        if (network::post('database_provider') != '') {
+          $config .= '  define(\'DATABASE\', \''.network::post('database_provider').'\');'.PHP_EOL;
+        }
         $config .= '  define(\'DATABASE_HOST\', \''.network::post('database_host').'\');'.PHP_EOL;
         $config .= '  define(\'DATABASE_NAME\', \''.network::post('database_name').'\');'.PHP_EOL;
         $config .= '  define(\'DATABASE_USER\', \''.network::post('database_user').'\');'.PHP_EOL;
         $config .= '  define(\'DATABASE_PWD\', \''.network::post('database_pwd').'\');'.PHP_EOL;
         $config .= '  define(\'TABLE_PREFIX\', \''.network::post('table_prefix').'\');'.PHP_EOL;
-        $config .= '  define(\'SECURITY\', \''.network::post('security_provider').'\');'.PHP_EOL;
+        if (network::post('security_provider') != '') {
+          $config .= '  define(\'SECURITY\', \''.network::post('security_provider').'\');'.PHP_EOL;
+        }
         $config .= '?>';
         file_put_contents(BASE.DIRECTORY_SEPARATOR.'config.php', $config, LOCK_EX);
         
