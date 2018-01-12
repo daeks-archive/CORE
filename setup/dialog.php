@@ -16,7 +16,7 @@ if (network::get('action') != '') {
         echo '<div class="alert alert-danger" role="alert"><b>'.rb::get('core.error').'</b> '.rb::get('setup.writable', array(DATA)).'</div>';
       }
       echo '<p>'.rb::get('setup.general').'</p>';
-      echo form::get(array('id' => 'name', 'name' => rb::get('setup.name'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::get(array('id' => 'name', 'name' => rb::get('setup.appname'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       echo form::get(array('id' => 'brand', 'name' => rb::get('setup.brand'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       echo '<p>'.rb::get('setup.database').'</p>';
       echo form::get(array('id' => 'database_provider', 'name' => rb::get('setup.database_provider'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
