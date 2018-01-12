@@ -12,8 +12,9 @@
       define('COOKIE_LIFETIME', 60*60*24*7*4*3);
       
       define('BASE', dirname(dirname(realpath(__FILE__))));
-      define('CFX', dirname(realpath(__FILE__)));
       define('CONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', BASE)));
+      define('CFX', dirname(realpath(__FILE__)));
+      define('CFXCONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', CFX)));
       define('CORE', CFX.DIRECTORY_SEPARATOR.'core');
       define('CACHE', CFX.DIRECTORY_SEPARATOR.'cache');
       define('DATA', CFX.DIRECTORY_SEPARATOR.'data');
