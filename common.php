@@ -58,7 +58,8 @@
       foreach (scandir($path) as $object) {
         if (is_file($path.DIRECTORY_SEPARATOR.$object)) {
           array_push($map['files'], $path.DIRECTORY_SEPARATOR.$object);
-        } else if (is_dir($path.DIRECTORY_SEPARATOR.$object) && $object != '.' && $object != '..') {
+        }
+        if (is_dir($path.DIRECTORY_SEPARATOR.$object) && $object != '.' && $object != '..') {
           array_push($map['folders'], $path.DIRECTORY_SEPARATOR.$object);
         }
       }
