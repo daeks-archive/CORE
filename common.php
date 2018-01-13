@@ -7,6 +7,7 @@
   class common
   {
     private static $cache = 60;
+    private static $types = array('interface', 'class');
   
     public static function construct()
     {
@@ -17,7 +18,10 @@
       define('CONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', BASE)));
       define('CFX', dirname(realpath(__FILE__)));
       define('CFXCONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', CFX)));
-      define('CORE', CFX.DIRECTORY_SEPARATOR.'core');
+      define('CORE', CFX.DIRECTORY_SEPARATOR.'include');
+      define('WEB', CFX.DIRECTORY_SEPARATOR.'web');
+      define('PROVIDER', CFX.DIRECTORY_SEPARATOR.'provider');
+      define('LANG', CFX.DIRECTORY_SEPARATOR.'lang');
       define('CACHE', CFX.DIRECTORY_SEPARATOR.'cache');
       define('DATA', CFX.DIRECTORY_SEPARATOR.'data');
             
@@ -32,10 +36,9 @@
         define('DEBUG', false);
       }
      
-      common::load(CORE.DIRECTORY_SEPARATOR.'include');
-      common::load(CORE.DIRECTORY_SEPARATOR.'database');
-      common::load(CORE.DIRECTORY_SEPARATOR.'security');
-      common::load(CORE);
+      common::load(CORE.DIRECTORY_SEPARATOR.'libs');
+      common::load(PROVIDER, true);
+      common::load(CORE, true);
       foreach (module::read(false) as $key => $module) {
         common::load($module->path);
       }
@@ -49,20 +52,30 @@
       db::instance()->construct();
     }
     
-    public static function load($path)
+    public static function load($path, $recursive = false)
     {
-      foreach (scandir($path) as $include) {
-        if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($path.DIRECTORY_SEPARATOR.$include, '.interface.') !== false && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'PHP') {
-          if (!class_exists(rtrim(pathinfo($include, PATHINFO_FILENAME), '.interface'))) {
-            require_once($path.DIRECTORY_SEPARATOR.$include);
+      $map = array('files' => array(), 'folders' => array());
+      foreach (scandir($path) as $object) {
+        if (is_file($path.DIRECTORY_SEPARATOR.$object)) {
+          array_push($map['files'], $path.DIRECTORY_SEPARATOR.$object);
+        }
+        if (is_dir($path.DIRECTORY_SEPARATOR.$object) && $object != '.' && $object != '..') {
+          array_push($map['folders'], $path.DIRECTORY_SEPARATOR.$object);
+        }
+      }
+      
+      foreach ($map['files'] as $object) {
+        foreach (common::$types as $type) {
+          if (strpos($object, '.'.$type.'.') !== false && strtoupper(pathinfo($object, PATHINFO_EXTENSION)) == 'PHP') {
+            if (!class_exists(rtrim(pathinfo($object, PATHINFO_FILENAME), '.'.$type))) {
+              require_once($object);
+            }
           }
         }
       }
-      foreach (scandir($path) as $include) {
-        if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($path.DIRECTORY_SEPARATOR.$include, '.class.') !== false && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'PHP') {
-          if (!class_exists(rtrim(pathinfo($include, PATHINFO_FILENAME), '.class'))) {
-            require_once($path.DIRECTORY_SEPARATOR.$include);
-          }
+      if ($recursive) {
+        foreach ($map['folders'] as $object) {
+          common::load($object, $recursive);
         }
       }
     }
@@ -72,7 +85,7 @@
       $offset = strpos($target, '?');
       if ($offset !== false) {
         $params = substr($target, $offset+1);
-        $include = substr($target, 0, $offset);
+        $object = substr($target, 0, $offset);
         foreach (explode('&', $params) as $value) {
           $parts = explode('=', $value);
           if (sizeof($parts) == 2) {
@@ -81,7 +94,7 @@
             $_GET[$parts[0]] = '';
           }
         }
-        include($include);
+        include($object);
       } else {
         include($target);
       }

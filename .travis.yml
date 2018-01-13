@@ -12,6 +12,6 @@ install:
 script:
   - ./vendor/bin/phpcs ./
       --standard=ruleset.xml
-      --ignore="vendor/*,core/js/*,core/css/*,core/inc/*"
+      --ignore="vendor/*,web/js/*,web/css/*,include/libs/*"
       --colors
       --extensions=php,js,css

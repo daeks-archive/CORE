@@ -85,7 +85,7 @@ class topbar
     if (user::read('avatar') != '') {
       echo '<img id="profile-img" class="user-img" src="'.user::read('avatar').'" />';
     } else {
-      echo '<img id="profile-img" class="user-img" src="'.CFXCONTEXT.URL_SEPARATOR,'core'.URL_SEPARATOR.'img'.URL_SEPARATOR.'avatar.png" />';
+      echo '<img id="profile-img" class="user-img" src="'.CFXCONTEXT.URL_SEPARATOR,'web'.URL_SEPARATOR.'img'.URL_SEPARATOR.'avatar.png" />';
     }
     echo '</a>';
     echo '<ul class="dropdown-menu" aria-labelledby="usermenu">';

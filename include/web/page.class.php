@@ -26,7 +26,7 @@ class page
     echo '<link rel="icon" type="image/x-icon" href="'.CONTEXT.'/favicon.ico" />';
     echo '<meta name="robots" content="noindex">';
     
-    $jsinclude = array(CORE.DIRECTORY_SEPARATOR.'js', CORE);
+    $jsinclude = array(WEB.DIRECTORY_SEPARATOR.'js', WEB);
     if ($module != null) {
       array_push($jsinclude, $module->path);
     }
@@ -39,7 +39,7 @@ class page
       }
     }
   
-    $cssinclude = array(CORE.DIRECTORY_SEPARATOR.'css', CORE);
+    $cssinclude = array(WEB.DIRECTORY_SEPARATOR.'css', WEB);
     if ($module != null) {
       array_push($cssinclude, $module->path);
     }

@@ -12,7 +12,7 @@ class rb
       $module .= $value.'.';
     }
     $module = rtrim($module, '.');
-    $paths = array(BASE, BASE.DIRECTORY_SEPARATOR.$module, CFX.DIRECTORY_SEPARATOR.$module);
+    $paths = array(BASE, BASE.DIRECTORY_SEPARATOR.$module, LANG.DIRECTORY_SEPARATOR, CFX.DIRECTORY_SEPARATOR.$module);
     
     foreach ($paths as $path) {
       if (sizeof($tmp) > 1) {
