@@ -37,4 +37,4 @@ Contributions to this project are welcome. Please follow the coding standard PSR
 
 Distributed under the MIT-Style License. See `LICENSE` file for more information.
 
-[![Build Status](https://travis-ci.org/daeks/DNET-CORE.svg?branch=master)](https://travis-ci.org/daeks/DNET-CORE)
+[![Build Status](https://travis-ci.org/D-NET/CORE.svg?branch=master)](https://travis-ci.org/D-NET/CORE)
