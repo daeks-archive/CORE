@@ -31,10 +31,6 @@
       }
             
       define('URL_SEPARATOR', '/');
-      
-      if (!defined('DEBUG')) {
-        define('DEBUG', false);
-      }
      
       common::load(CORE.DIRECTORY_SEPARATOR.'libs');
       common::load(PROVIDER, true);
@@ -47,7 +43,6 @@
         common::load($module->path);
       }
       
-      common::defaults();
       session::construct();
       db::instance()->construct();
     }
@@ -100,41 +95,27 @@
       }
     }
     
-    public static function defaults()
+    public static function config($item = 'config')
     {
-      if (!defined('NAME')) {
-        define('NAME', rb::get('core.name'));
-      }
-      if (!defined('NAME')) {
-        define('NAME', cache::read('NAME'));
+      return dirname(dirname(realpath(__FILE__))).DIRECTORY_SEPARATOR.$item.'.php';
+    }
+    
+    public static function debug()
+    {
+      if (defined('DEBUG')) {
+        return DEBUG;
       } else {
-        cache::write('NAME', NAME, common::$cache);
-      }
-      if (!defined('BRAND')) {
-        define('BRAND', cache::read('BRAND'));
-      } else {
-        cache::write('BRAND', BRAND, common::$cache);
-      }
-      if (!defined('DATABASE')) {
-        define('DATABASE', cache::read('DATABASE'));
-      } else {
-        cache::write('DATABASE', DATABASE, common::$cache);
-      }
-      if (!defined('TABLE_PREFIX')) {
-        define('TABLE_PREFIX', cache::read('TABLE_PREFIX'));
-      } else {
-        cache::write('TABLE_PREFIX', TABLE_PREFIX, common::$cache);
-      }
-      if (!defined('SECURITY')) {
-        define('SECURITY', cache::read('SECURITY'));
-      } else {
-        cache::write('SECURITY', SECURITY, common::$cache);
+        return false;
       }
     }
     
-    public static function config()
+    public static function constant($item)
     {
-      return dirname(dirname(realpath(__FILE__))).DIRECTORY_SEPARATOR.'config.php';
+      if (defined($item)) {
+        return constant($item);
+      } else {
+        return '';
+      }
     }
     
     public static function errorhandler($ex)
