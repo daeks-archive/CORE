@@ -2,28 +2,28 @@
 
 class topbar
 {
-  public static function construct()
+  public static function construct($menu = '*')
   {
     $menuright = array('public' => array(), 'private' => array());
     $menuleft = array('public' => array(), 'private' => array());
     foreach (module::read() as $key => $tmp) {
       if (isset($tmp->navbits)) {
-        foreach ($tmp->navbits as $menu) {
-          if ($menu->menu == '*') {
-            if ($menu->position == 'topbar' || $menu->position == 'topbar-left') {
-              if (!array_key_exists($menu->order, $menuleft)) {
-                if ($menu->authenticated) {
-                  $menuleft['private'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
+        foreach ($tmp->navbits as $item) {
+          if ($item->menu == $menu) {
+            if ($item->position == 'topbar' || $item->position == 'topbar-left') {
+              if (!array_key_exists($item->order, $menuleft)) {
+                if ($item->authenticated) {
+                  $menuleft['private'][$item->order] = $tmp->path.DIRECTORY_SEPARATOR.$item->target;
                 } else {
-                  $menuleft['public'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
+                  $menuleft['public'][$item->order] = $tmp->path.DIRECTORY_SEPARATOR.$item->target;
                 }
               }
-            } elseif ($menu->position == 'topbar-right') {
-              if (!array_key_exists($menu->order, $menuright)) {
-                if ($menu->authenticated) {
-                  $menuright['private'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
+            } elseif ($item->position == 'topbar-right') {
+              if (!array_key_exists($item->order, $menuright)) {
+                if ($item->authenticated) {
+                  $menuright['private'][$item->order] = $tmp->path.DIRECTORY_SEPARATOR.$item->target;
                 } else {
-                  $menuright['public'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
+                  $menuright['public'][$item->order] = $tmp->path.DIRECTORY_SEPARATOR.$item->target;
                 }
               }
             }
@@ -34,10 +34,10 @@ class topbar
     
     echo '<div class="navbar navbar-inverse navbar-fixed-top display-xs display-sm display-md display-lg" role="navigation">';
     echo '<div class="navbar-header">';
-    if (defined('BRAND') && BRAND != '') {
-      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'"><img style="max-width:30px; margin-top: -7px;" src="'.CONTEXT.URL_SEPARATOR.BRAND.'"> '.NAME.'</a>';
+    if (common::constant('BRAND') != '') {
+      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'"><img style="max-width:30px; margin-top: -7px;" src="'.CONTEXT.URL_SEPARATOR.BRAND.'"> '.common::constant('NAME').'</a>';
     } else {
-      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'">'.NAME.'</a>';
+      echo '<a class="navbar-brand" href="'.CONTEXT.URL_SEPARATOR.'">'.common::constant('NAME').'</a>';
     }
     echo '</div>';
 
@@ -85,7 +85,16 @@ class topbar
     if (isset($module->id) && $module->id == $id) {
       echo '<li class="active">';
     } else {
-      echo '<li>';
+      $tmp = explode('.', $module->id);
+      if (sizeof($tmp) == 2) {
+        if ($tmp[0] == $id) {
+          echo '<li class="active">';
+        } else {
+          echo '<li>';
+        }
+      } else {
+        echo '<li>';
+      }
     }
     echo '<a href="'.$target.'">';
     if (isset($options['icon']) && $options['icon'] != '') {

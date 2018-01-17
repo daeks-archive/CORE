@@ -17,10 +17,10 @@ class page
     echo '<head>';
 
     $module = module::selfread();
-    if ($module != null) {
-      echo '<title>'.NAME.' - '.rb::get($module->id.'.name').'</title>';
+    if ($module != null && isset($module->id)) {
+      echo '<title>'.common::constant('NAME').' - '.rb::get($module->id.'.name').'</title>';
     } else {
-      echo '<title>'.NAME.'</title>';
+      echo '<title>'.common::constant('NAME').'</title>';
     }
     
     echo '<link rel="icon" type="image/x-icon" href="'.CONTEXT.'/favicon.ico" />';
@@ -34,7 +34,7 @@ class page
       foreach (scandir($path) as $include) {
         if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($include, '..') == 0 && strpos($include, 'min') == 0  && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'JS') {
           $ref = str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, str_replace(BASE.DIRECTORY_SEPARATOR, '', $path)).URL_SEPARATOR.$include;
-          echo '<script type="text/javascript" src="'.CONTEXT.URL_SEPARATOR.$ref.(DEBUG ? '?v='.time() : '?v='.VERSION).'"></script>';
+          echo '<script type="text/javascript" src="'.CONTEXT.URL_SEPARATOR.$ref.(common::debug() ? '?v='.time() : '?v='.VERSION).'"></script>';
         }
       }
     }
@@ -47,7 +47,7 @@ class page
       foreach (scandir($path) as $include) {
         if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($include, '..') == 0 && strpos($include, 'min') == 0  && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'CSS') {
           $ref = str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, str_replace(BASE.DIRECTORY_SEPARATOR, '', $path)).URL_SEPARATOR.$include;
-          echo '<link type="text/css" href="'.CONTEXT.URL_SEPARATOR.$ref.(DEBUG ? '?v='.time() : '?v='.VERSION).'" rel="stylesheet" media="screen" />';
+          echo '<link type="text/css" href="'.CONTEXT.URL_SEPARATOR.$ref.(common::debug() ? '?v='.time() : '?v='.VERSION).'" rel="stylesheet" media="screen" />';
         }
       }
     }

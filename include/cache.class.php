@@ -29,7 +29,7 @@ class cache
   {
     $output = CACHE.DIRECTORY_SEPARATOR.md5($key);
     if (file_exists($output)) {
-      if (time() - filemtime($output) > $cache || filesize($output) == 0 || DEBUG == true) {
+      if (time() - filemtime($output) > $cache || filesize($output) == 0 || common::debug()) {
         return false;
       } else {
         return true;

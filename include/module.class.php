@@ -47,6 +47,12 @@ class module
             }
           }
         }
+      } else {
+        if ($item == module::$config) {
+          $module = json_decode(file_get_contents(BASE.DIRECTORY_SEPARATOR.module::$config));
+          $module->path = BASE;
+          $tmp['*'] = $module;
+        }
       }
     }
     return $tmp;
