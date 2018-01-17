@@ -88,7 +88,7 @@ class sidebar
     } else {
       echo '<li>';
     }
-    echo '<a href="'.$target.'</a>">';
+    echo '<a href="'.$target.'">';
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
@@ -108,7 +108,6 @@ class sidebar
     echo '</div>';
     echo '</div>';
   }
-  
 }
 
 ?>
