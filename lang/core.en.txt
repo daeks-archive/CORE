@@ -13,5 +13,6 @@
   "invalid_action" : "Invalid action - {0}",
   "username": "Username:",
   "password": "Password:",
-  "invalid_login": "Login failed. Invalid credentials."
+  "invalid_login": "Login failed. Invalid credentials.",
+  "beta" : "BETA"
 }
