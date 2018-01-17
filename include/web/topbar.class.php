@@ -9,8 +9,8 @@ class topbar
     foreach (module::read() as $key => $tmp) {
       if (isset($tmp->navbits)) {
         foreach ($tmp->navbits as $menu) {
-          if ($menu->menu == '' || $menu->menu == '*') {
-            if ($menu->position == 'top-left') {
+          if ($menu->menu == '*') {
+            if ($menu->position == 'topbar' || $menu->position == 'topbar-left') {
               if (!array_key_exists($menu->order, $menuleft)) {
                 if ($menu->authenticated) {
                   $menuleft['private'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
@@ -18,7 +18,7 @@ class topbar
                   $menuleft['public'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
                 }
               }
-            } elseif ($menu->position == 'top-right') {
+            } elseif ($menu->position == 'topbar-right') {
               if (!array_key_exists($menu->order, $menuright)) {
                 if ($menu->authenticated) {
                   $menuright['private'][$menu->order] = $tmp->path.DIRECTORY_SEPARATOR.$menu->target;
@@ -78,6 +78,24 @@ class topbar
     echo '</div>';
   }
   
+  public static function renderbit($id, $name, $target, $options = array())
+  {
+    $module = module::selfread();
+    echo '<ul class="nav navbar-nav">';
+    if (isset($module->id) && $module->id == $id) {
+      echo '<li class="active">';
+    } else {
+      echo '<li>';
+    }
+    echo '<a href="'.$target.'">';
+    if (isset($options['icon']) && $options['icon'] != '') {
+      echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
+    }
+    echo $name.'</a>';
+    echo '</li>';
+    echo '</ul>';
+  }
+   
   public static function profile()
   {
     echo '<div class="user-img-box pull-right dropdown">';

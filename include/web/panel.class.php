@@ -24,7 +24,7 @@ class panel
           if ($widget->dashboard == $dashboard) {
             $target = $tmp->path.DIRECTORY_SEPARATOR.$widget->target;
             if (array_key_exists($widget->grid->row, $fieldset)) {
-              $position = $widget->grid->position.'-col-sm-'.$widget->grid->size[$widget->grid->position];
+              $position = $widget->grid->position.'-col-sm-'.$widget->grid->format[$widget->grid->position];
               while (isset($fieldset[$widget->grid->row][$position][$widget->grid->order])) {
                 $widget->grid->order++;
               }
@@ -32,11 +32,11 @@ class panel
             } else {
               $i = 0;
               $fieldset[$widget->grid->row] = array();
-              foreach ($widget->grid->size as $size) {
+              foreach ($widget->grid->format as $size) {
                 $fieldset[$widget->grid->row][$i.'-col-sm-'.$size] = array();
                 $i++;
               }
-              $position = $widget->grid->position.'-col-sm-'.$widget->grid->size[$widget->grid->position];
+              $position = $widget->grid->position.'-col-sm-'.$widget->grid->format[$widget->grid->position];
               $fieldset[$widget->grid->row][$position][$widget->grid->order] = $target;
             }
           }

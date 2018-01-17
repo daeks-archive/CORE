@@ -12,21 +12,21 @@ class rb
       $module .= $value.'.';
     }
     $module = rtrim($module, '.');
-    $paths = array(BASE, BASE.DIRECTORY_SEPARATOR.$module, LANG.DIRECTORY_SEPARATOR, CFX.DIRECTORY_SEPARATOR.$module);
+    $paths = array(BASE, BASE.DIRECTORY_SEPARATOR.$module, BASE.DIRECTORY_SEPARATOR.str_replace('.', DIRECTORY_SEPARATOR, $module), LANG.DIRECTORY_SEPARATOR, CFX.DIRECTORY_SEPARATOR.$module);
     
     foreach ($paths as $path) {
       if (sizeof($tmp) > 1) {
         $rb = $path.DIRECTORY_SEPARATOR.$module.'.'.substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2).'.txt';
         if (file_exists($rb)) {
           $bundle = json_decode(utf8_encode(file_get_contents($rb)), true);
-          if (isset($bundle[$tmp[1]])) {
-            return rb::parse($bundle[$tmp[1]], $variables);
+          if (isset($bundle[end($tmp)])) {
+            return rb::parse($bundle[end($tmp)], $variables);
           } else {
             $rb = $path.DIRECTORY_SEPARATOR.$module.'.'.rb::$defaultlanguage.'.txt';
             if (file_exists($rb)) {
               $bundle = json_decode(utf8_encode(file_get_contents($rb)), true);
-              if (isset($bundle[$tmp[1]])) {
-                return rb::parse($bundle[$tmp[1]], $variables);
+              if (isset($bundle[end($tmp)])) {
+                return rb::parse($bundle[end($tmp)], $variables);
               } else {
                 continue;
               }
@@ -38,8 +38,8 @@ class rb
           $rb = $path.DIRECTORY_SEPARATOR.$module.'.'.rb::$defaultlanguage.'.txt';
           if (file_exists($rb)) {
             $bundle = json_decode(utf8_encode(file_get_contents($rb)), true);
-            if (isset($bundle[$tmp[1]])) {
-              return rb::parse($bundle[$tmp[1]], $variables);
+            if (isset($bundle[end($tmp)])) {
+              return rb::parse($bundle[end($tmp)], $variables);
             } else {
               continue;
             }
