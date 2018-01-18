@@ -1,21 +1,21 @@
 <?php
 
-class panel
+class dashboard
 {
-  public static function start($title = '', $type = 'default')
+  public static function widgetstart($title = '', $type = 'default')
   {
     echo '<div class="panel panel-'.$type.'">';
     echo '<div class="panel-heading"><h3 class="panel-title">'.$title.'</h3></div>';
     echo '<div class="panel-body">';
   }
           
-  public static function end()
+  public static function widgetend()
   {
     echo '</div>';
     echo '</div>';
   }
   
-  public static function dashboard($dashboard = '*')
+  public static function construct($dashboard = '*')
   {
     $fieldset = array();
     $format = null;

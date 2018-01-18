@@ -47,7 +47,7 @@ class sidebar
     echo '<div class="col-sm-10 col-lg-10 hidden-xs hidden-sm display-md display-lg">';
   }
   
-  public static function renderbit($id, $name, $target, $options = array())
+  public static function bit($id, $name, $target, $options = array())
   {
     $module = module::selfread();
     if (isset($module->id) && $module->id == $id) {
@@ -67,7 +67,7 @@ class sidebar
     echo '</li>';
   }
   
-  public static function startmenu($id, $name, $options = array())
+  public static function menustart($id, $name, $options = array())
   {
     echo '<li>';
     echo '<a data-toggle="collapse" data-target="#'.$id.'" href="#">';
@@ -80,7 +80,13 @@ class sidebar
     echo '<form id="'.$id.'" class="dropdown-menu dropdown-icon collapse-icon collapse in">';
   }
   
-  public static function rendermenubit($id, $name, $target, $options = array())
+  public static function menuend()
+  {
+    echo '</form>';
+    echo '</li>';
+  }
+  
+  public static function menubit($id, $name, $target, $options = array())
   {
     $module = module::selfread();
     if (isset($module->id) && $module->id == $id) {
@@ -96,13 +102,7 @@ class sidebar
     echo '</a>';
     echo '</li>';
   }
-  
-  public static function endmenu()
-  {
-    echo '</form>';
-    echo '</li>';
-  }
-  
+    
   public static function end()
   {
     echo '</div>';

@@ -27,8 +27,8 @@
     public static function modal()
     {
       modal::start(rb::get('core.login'), str_replace('security-modal', 'security-login', $_SERVER['REQUEST_URI']));
-      echo form::get(array('id' => 'username', 'name' => rb::get('core.username'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::get(array('id' => 'password', 'name' => rb::get('core.password'), 'validator' => 'data-fv-notempty', 'type' => 'password'), '');
+      echo form::construct(array('id' => 'username', 'name' => rb::get('core.username'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'password', 'name' => rb::get('core.password'), 'validator' => 'data-fv-notempty', 'type' => 'password'), '');
       modal::end(rb::get('core.login'));
     }
   }

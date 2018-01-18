@@ -2,7 +2,7 @@
   
 class form
 {
-  public static function get($obj, $value = '')
+  public static function construct($obj, $value = '')
   {
     $data = '';
     switch ($obj['type']) {

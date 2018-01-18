@@ -19,23 +19,23 @@ if (network::get('action') != '') {
         echo '<p>'.rb::get('setup.general').'</p>';
       }
       if (!defined('NAME')) {
-        echo form::get(array('id' => 'name', 'name' => rb::get('setup.appname'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+        echo form::construct(array('id' => 'name', 'name' => rb::get('setup.appname'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       }
       if (!defined('BRAND')) {
-        echo form::get(array('id' => 'brand', 'name' => rb::get('setup.brand'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+        echo form::construct(array('id' => 'brand', 'name' => rb::get('setup.brand'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       }
       echo '<p>'.rb::get('setup.database').'</p>';
       if (!defined('DATABASE')) {
-        echo form::get(array('id' => 'database_provider', 'name' => rb::get('setup.database_provider'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+        echo form::construct(array('id' => 'database_provider', 'name' => rb::get('setup.database_provider'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       }
-      echo form::get(array('id' => 'database_host', 'name' => rb::get('setup.database_host'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::get(array('id' => 'database_name', 'name' => rb::get('setup.database_name'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::get(array('id' => 'database_user', 'name' => rb::get('setup.database_user'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::get(array('id' => 'database_pwd', 'name' => rb::get('setup.database_pwd'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::get(array('id' => 'table_prefix', 'name' => rb::get('setup.table_prefix'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'database_host', 'name' => rb::get('setup.database_host'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'database_name', 'name' => rb::get('setup.database_name'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'database_user', 'name' => rb::get('setup.database_user'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'database_pwd', 'name' => rb::get('setup.database_pwd'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'table_prefix', 'name' => rb::get('setup.table_prefix'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       if (!defined('SECURITY')) {
         echo '<p>'.rb::get('setup.security').'</p>';
-        echo form::get(array('id' => 'security_provider', 'name' => rb::get('setup.security_provider'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+        echo form::construct(array('id' => 'security_provider', 'name' => rb::get('setup.security_provider'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
       }
       modal::end(rb::get('setup.name'), 'success');
       break;

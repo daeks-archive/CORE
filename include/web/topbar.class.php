@@ -78,17 +78,21 @@ class topbar
     echo '</div>';
   }
   
-  public static function renderbit($id, $name, $target, $options = array())
+  public static function bit($id, $name, $target, $options = array())
   {
     $module = module::selfread();
     echo '<ul class="nav navbar-nav">';
     if (isset($module->id) && $module->id == $id) {
       echo '<li class="active">';
     } else {
-      $tmp = explode('.', $module->id);
-      if (sizeof($tmp) == 2) {
-        if ($tmp[0] == $id) {
-          echo '<li class="active">';
+      if (isset($module->id)) {
+        $tmp = explode('.', $module->id);
+        if (sizeof($tmp) == 2) {
+          if ($tmp[0] == $id) {
+            echo '<li class="active">';
+          } else {
+            echo '<li>';
+          }
         } else {
           echo '<li>';
         }
