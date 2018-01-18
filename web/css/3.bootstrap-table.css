@@ -17,7 +17,7 @@
 .bootstrap-table .table:not(.table-condensed) > thead > tr > td,
 .bootstrap-table .table:not(.table-condensed) > tbody > tr > td,
 .bootstrap-table .table:not(.table-condensed) > tfoot > tr > td {
-    padding: 8px;
+    padding: 6px;
 }
 
 .bootstrap-table .table.table-no-bordered > thead > tr > th,
@@ -78,7 +78,7 @@
 .fixed-table-container thead th .th-inner,
 .fixed-table-container tbody td .th-inner {
     padding: 8px;
-    line-height: 24px;
+    line-height: 14px;
     vertical-align: top;
     overflow: hidden;
     text-overflow: ellipsis;

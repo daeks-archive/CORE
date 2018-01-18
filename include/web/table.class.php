@@ -6,7 +6,7 @@ class table
   {
     echo '<div id="toolbar">';
     echo '<div class="form-inline" role="form">';
-    foreach($buttons as $button) {
+    foreach ($buttons as $button) {
       echo $button.' ';
     }
     echo '</div>';
@@ -35,7 +35,7 @@ class table
     echo ' data-row-style="rowStyle"';
     echo '><thead>';
     echo '<tr>';
-    foreach($fields as $field) {
+    foreach ($fields as $field) {
       echo '<th data-field="'.$field['id'].'"';
       if (isset($field['sort'])) {
         echo ' data-sortable="'.$field['sort'].'"';
