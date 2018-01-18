@@ -28,7 +28,8 @@ class network
     echo json_encode($array);
   }
   
-  public static function data($total, $data) {
+  public static function data($total, $data)
+  {
     $array = array();
     $array['status'] = 200;
     $array['data'] = (($data == null) ? '' : $data);
