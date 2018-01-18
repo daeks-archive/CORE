@@ -104,7 +104,11 @@ class topbar
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
-    echo $name.'</a>';
+    echo $name;
+    if (isset($options['badge'])) {
+      echo '<span style="padding-left: 10px"><span class="badge pull-right">'.$options['badge'].'</span></span>';
+    }
+    echo '</a>';
     echo '</li>';
     echo '</ul>';
   }
