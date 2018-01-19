@@ -78,17 +78,21 @@ class topbar
     echo '</div>';
   }
   
-  public static function renderbit($id, $name, $target, $options = array())
+  public static function bit($id, $name, $target, $options = array())
   {
     $module = module::selfread();
     echo '<ul class="nav navbar-nav">';
     if (isset($module->id) && $module->id == $id) {
       echo '<li class="active">';
     } else {
-      $tmp = explode('.', $module->id);
-      if (sizeof($tmp) == 2) {
-        if ($tmp[0] == $id) {
-          echo '<li class="active">';
+      if (isset($module->id)) {
+        $tmp = explode('.', $module->id);
+        if (sizeof($tmp) == 2) {
+          if ($tmp[0] == $id) {
+            echo '<li class="active">';
+          } else {
+            echo '<li>';
+          }
         } else {
           echo '<li>';
         }
@@ -100,7 +104,11 @@ class topbar
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
-    echo $name.'</a>';
+    echo $name;
+    if (isset($options['badge'])) {
+      echo '<span style="padding-left: 10px"><span class="badge pull-right">'.$options['badge'].'</span></span>';
+    }
+    echo '</a>';
     echo '</li>';
     echo '</ul>';
   }

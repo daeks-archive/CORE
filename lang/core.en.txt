@@ -14,5 +14,7 @@
   "username": "Username:",
   "password": "Password:",
   "invalid_login": "Login failed. Invalid credentials.",
-  "beta" : "BETA"
+  "beta" : "BETA",
+  "lock" : "LOCKED",
+  "disabled" : "DISABLED"
 }

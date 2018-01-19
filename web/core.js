@@ -4,16 +4,17 @@
 
       var init = function () {
         var scripts= document.getElementsByTagName('script'),
-        path = scripts[scripts.length-1].src.split('?')[0],
+        path = scripts[0].src.split('?')[0],
         curpath = path.split('/').slice(0, -1).join('/')+'/',
-        parpath = curpath.split('/').slice(0, -2).join('/')+'/';
+        webpath = curpath.split('/').slice(0, -2).join('/')+'/';
+        cfxpath = webpath.split('/').slice(0, -2).join('/')+'/';
       
-        $.get(parpath+'setup/controller.php?action=init', function (data) {
+        $.get(cfxpath+'setup/controller.php?action=init', function (data) {
           try {
             var obj = $.parseJSON(data);
             if (obj.status == 200) {
               if (obj.data > 0) {
-                $('.modal-content').load(parpath+'setup/dialog.php?action=setup',function (result) {
+                $('.modal-content').load(cfxpath+'setup/dialog.php?action=setup',function (result) {
                   $('.modal').modal({
                     show:true,
                     backdrop: 'static',
