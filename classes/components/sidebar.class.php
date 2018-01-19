@@ -68,9 +68,6 @@ class sidebar
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
     echo $name;
-    if (isset($options['badge'])) {
-      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
-    }
     if (isset($options['disabled']) && $options['disabled'] == true) {
       echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.disabled').'"></i>';
     }
@@ -79,6 +76,9 @@ class sidebar
     }
     if (isset($options['beta']) && $options['beta'] == true) {
       echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
+    }
+    if (isset($options['badge'])) {
+      echo '<span class="badge pull-right">'.$options['badge'].'</span>';
     }
     echo '</a>';
     echo '</li>';
@@ -107,7 +107,7 @@ class sidebar
       echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
     }
     if (isset($options['badge'])) {
-      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
+      echo '<span class="badge pull-right">'.$options['badge'].'</span>';
     }
     echo '</a>';
     if (isset($options['collapsed']) && $options['collapsed'] == true) {
@@ -154,7 +154,7 @@ class sidebar
       echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
     }
     if (isset($options['badge'])) {
-      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
+      echo '<span class="badge pull-right">'.$options['badge'].'</span>';
     }
     echo '</a>';
     echo '</li>';
