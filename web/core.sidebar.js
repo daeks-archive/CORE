@@ -2,7 +2,7 @@
     
     var sidebar = (function () {
       var init = function () {
-        $('[data-toggle=collapse]').click(function(){
+        $('[data-toggle=collapse]').click(function () {
           $(this).find("b").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
         });
       };
