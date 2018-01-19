@@ -54,12 +54,16 @@ class sidebar
       echo '<li class="navbar-fixed-side-active">';
     } else {
       if (isset($options['disabled']) && $options['disabled'] == true) {
-        echo '<li class="disabled">';
+        echo '<li class="navbar-fixed-side-disabled">';
       } else {
         echo '<li>';
       }
     }
-    echo '<a href="'.$target.'">';
+    if (isset($options['disabled']) && $options['disabled'] != true) {
+      echo '<a href="'.$target.'">';
+    } else {
+      echo '<a href="#">';
+    }
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
@@ -88,9 +92,25 @@ class sidebar
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
     echo $name;
-    echo '<b class="dropdown-caret glyphicon glyphicon-chevron-down pull-right"></b>';
+    if (isset($options['collapsed']) && $options['collapsed'] == true) {
+      echo '<b class="dropdown-caret glyphicon glyphicon-chevron-right pull-right"></b>';
+    } else {
+      echo '<b class="dropdown-caret glyphicon glyphicon-chevron-down pull-right"></b>';
+    }
+    if (isset($options['disabled']) && $options['disabled'] == true) {
+      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.disabled').'"></i>';
+    }
+    if (isset($options['lock']) && $options['lock'] == true) {
+      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.lock').'"></i>';
+    }
+    if (isset($options['beta']) && $options['beta'] == true) {
+      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.beta').'"></i>';
+    }
+    if (isset($options['badge'])) {
+      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
+    }
     echo '</a>';
-    if (isset($options['mode']) && $options['mode'] == 'collapsed') {
+    if (isset($options['collapsed']) && $options['collapsed'] == true) {
       echo '<form id="'.$id.'" class="dropdown-menu dropdown-icon collapse-icon collapse">';
     } else {
       echo '<form id="'.$id.'" class="dropdown-menu dropdown-icon collapse-icon collapse in">';
@@ -110,19 +130,20 @@ class sidebar
       echo '<li class="dropdown-active">';
     } else {
       if (isset($options['disabled']) && $options['disabled'] == true) {
-        echo '<li class="disabled">';
+        echo '<li class="dropdown-disabled">';
       } else {
         echo '<li>';
       }
     }
-    echo '<a href="'.$target.'">';
+    if (isset($options['disabled']) && $options['disabled'] != true) {
+      echo '<a href="'.$target.'">';
+    } else {
+      echo '<a href="#">';
+    }
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
     }
     echo $name;
-    if (isset($options['badge'])) {
-      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
-    }
     if (isset($options['disabled']) && $options['disabled'] == true) {
       echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.disabled').'"></i>';
     }
@@ -131,6 +152,9 @@ class sidebar
     }
     if (isset($options['beta']) && $options['beta'] == true) {
       echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.beta').'"></i>';
+    }
+    if (isset($options['badge'])) {
+      echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
     }
     echo '</a>';
     echo '</li>';
