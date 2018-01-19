@@ -106,7 +106,7 @@ class topbar
     }
     echo $name;
     if (isset($options['badge'])) {
-      echo '<span style="padding-left: 10px"><span class="badge pull-right">'.$options['badge'].'</span></span>';
+      echo '<span style="padding-left: 10px"><span class="badge">'.$options['badge'].'</span></span>';
     }
     echo '</a>';
     echo '</li>';
