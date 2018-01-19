@@ -72,13 +72,13 @@ class sidebar
       echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
     }
     if (isset($options['disabled']) && $options['disabled'] == true) {
-      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.disabled').'"></i>';
+      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.disabled').'"></i>';
     }
     if (isset($options['lock']) && $options['lock'] == true) {
-      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.lock').'"></i>';
+      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.lock').'"></i>';
     }
     if (isset($options['beta']) && $options['beta'] == true) {
-      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.beta').'"></i>';
+      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
     }
     echo '</a>';
     echo '</li>';
@@ -98,13 +98,13 @@ class sidebar
       echo '<b class="dropdown-caret glyphicon glyphicon-chevron-down pull-right"></b>';
     }
     if (isset($options['disabled']) && $options['disabled'] == true) {
-      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.disabled').'"></i>';
+      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.disabled').'"></i>';
     }
     if (isset($options['lock']) && $options['lock'] == true) {
-      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.lock').'"></i>';
+      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.lock').'"></i>';
     }
     if (isset($options['beta']) && $options['beta'] == true) {
-      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.beta').'"></i>';
+      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
     }
     if (isset($options['badge'])) {
       echo ' <span class="badge pull-right">'.$options['badge'].'</span>';
@@ -145,13 +145,13 @@ class sidebar
     }
     echo $name;
     if (isset($options['disabled']) && $options['disabled'] == true) {
-      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.disabled').'"></i>';
+      echo '<i class="fa fa-ban fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.disabled').'"></i>';
     }
     if (isset($options['lock']) && $options['lock'] == true) {
-      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.lock').'"></i>';
+      echo '<i class="fa fa-lock fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.lock').'"></i>';
     }
     if (isset($options['beta']) && $options['beta'] == true) {
-      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('core.beta').'"></i>';
+      echo '<i class="fa fa-flask fa-fw pull-right" data-title="tooltip" data-placement="left" title="'.rb::get('global.beta').'"></i>';
     }
     if (isset($options['badge'])) {
       echo ' <span class="badge pull-right">'.$options['badge'].'</span>';

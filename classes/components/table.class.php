@@ -17,7 +17,7 @@ class table
   {
     echo '<table id="table"';
     echo ' data-toggle="table"';
-    echo ' data-ajax="core.table.refresh"';
+    echo ' data-ajax="global.table.refresh"';
     if ($size > 0) {
       echo ' data-pagination="true"';
       echo ' data-page-size="'.$size.'"';

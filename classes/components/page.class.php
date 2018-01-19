@@ -33,7 +33,7 @@ class page
     foreach ($jsinclude as $path) {
       foreach (scandir($path) as $include) {
         if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($include, '..') == 0 && strpos($include, 'min') == 0  && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'JS') {
-          $ref = str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, str_replace(BASE.DIRECTORY_SEPARATOR, '', $path)).URL_SEPARATOR.$include;
+          $ref = network::convert($path).URL_SEPARATOR.$include;
           echo '<script type="text/javascript" src="'.CONTEXT.URL_SEPARATOR.$ref.(common::debug() ? '?v='.time() : '?v='.VERSION).'"></script>';
         }
       }
@@ -46,7 +46,7 @@ class page
     foreach ($cssinclude as $path) {
       foreach (scandir($path) as $include) {
         if (is_file($path.DIRECTORY_SEPARATOR.$include) && strpos($include, '..') == 0 && strpos($include, 'min') == 0  && strtoupper(pathinfo($include, PATHINFO_EXTENSION)) == 'CSS') {
-          $ref = str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, str_replace(BASE.DIRECTORY_SEPARATOR, '', $path)).URL_SEPARATOR.$include;
+          $ref = network::convert($path).URL_SEPARATOR.$include;
           echo '<link type="text/css" href="'.CONTEXT.URL_SEPARATOR.$ref.(common::debug() ? '?v='.time() : '?v='.VERSION).'" rel="stylesheet" media="screen" />';
         }
       }
@@ -55,7 +55,7 @@ class page
     echo '</head>';
     echo '<body '.(isset($onload)?'onload="'.$onload.'"':'').'>';
     topbar::construct();
-    echo '<div class="modal" id="modal" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content" id="modal-content"><br>&nbsp;&nbsp;<i class="fa fa-spinner fa-spin"></i> '.rb::get('core.loading').'<br><br></div></div></div>';
+    echo '<div class="modal" id="modal" tabindex="-1" role="dialog"><div class="modal-dialog"><div class="modal-content" id="modal-content"><br>&nbsp;&nbsp;<i class="fa fa-spinner fa-spin"></i> '.rb::get('global.loading').'<br><br></div></div></div>';
     echo '<div class="container-fluid '.self::$devices.'">';
     echo '<div id="infobox" class="infobox">'.$infobox.'</div>';
   }
@@ -65,19 +65,24 @@ class page
     echo '</div>';
     echo '<div class="container-fluid display-xs display-sm hidden-md hidden-lg">';
     echo '<div class="display-xs hidden-sm hidden-md hidden-lg not-supported">';
-    echo '<div class="alert alert-danger"><b>'.rb::get('core.mobile_not_supported').'</div>';
+    echo '<div class="alert alert-danger"><b>'.rb::get('global.mobile_not_supported').'</div>';
     echo '</div>';
     echo '<div class="hidden-xs display-sm hidden-md hidden-lg not-supported">';
-    echo '<div class="alert alert-danger"><b>'.rb::get('core.tablets_not_supported').'</div>';
+    echo '<div class="alert alert-danger"><b>'.rb::get('global.tablets_not_supported').'</div>';
     echo '</div>';
     echo '</div>';
     echo '<div class="footer navbar-fixed-bottom">';
     echo '<div class="container-fluid">';
-    echo '<p class="text-muted"> <i id="loading" style="margin-left: -10px" class="fa fa-spinner fa-spin hidden"></i> <span id="async">'.rb::get('core.footer', array(date('Y', time()), number_format(microtime(true) - self::$time, 5))).'</span></p>';
+    echo '<p class="text-muted"> <i id="loading" style="margin-left: -10px" class="fa fa-spinner fa-spin hidden"></i> <span id="async">'.rb::get('global.footer', array(date('Y', time()), number_format(microtime(true) - self::$time, 5))).'</span></p>';
     echo '</div>';
     echo '</div>';
     echo '</body>';
     echo '</html>';
+  }
+  
+  public static function destroy()
+  {
+    die();
   }
 }
 

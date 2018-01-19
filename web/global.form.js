@@ -17,13 +17,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         form: form
       }
     });
 
     $(function () {
-        core.form.init();
+        global.form.init();
     });
 
 }(jQuery));

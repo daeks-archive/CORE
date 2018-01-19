@@ -9,7 +9,7 @@
       } else {
         $_SERVER['REQUEST_URI'] .= '&security-modal';
       }
-      echo '<button type="button" class="btn btn-success" data-toggle="modal" href="'.$_SERVER['REQUEST_URI'].'" data-target="#modal" style="margin-top: 7px; margin-right: 5px">'.rb::get('core.login').'</button>';
+      echo '<button type="button" class="btn btn-success" data-toggle="modal" href="'.$_SERVER['REQUEST_URI'].'" data-target="#modal" style="margin-top: 7px; margin-right: 5px">'.rb::get('global.login').'</button>';
     }
     
     public static function authenticate()
@@ -26,10 +26,10 @@
     
     public static function modal()
     {
-      modal::start(rb::get('core.login'), str_replace('security-modal', 'security-login', $_SERVER['REQUEST_URI']));
-      echo form::construct(array('id' => 'username', 'name' => rb::get('core.username'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
-      echo form::construct(array('id' => 'password', 'name' => rb::get('core.password'), 'validator' => 'data-fv-notempty', 'type' => 'password'), '');
-      modal::end(rb::get('core.login'));
+      modal::start(rb::get('global.login'), str_replace('security-modal', 'security-login', $_SERVER['REQUEST_URI']));
+      echo form::construct(array('id' => 'username', 'name' => rb::get('global.username'), 'validator' => 'data-fv-notempty', 'type' => 'string'), '');
+      echo form::construct(array('id' => 'password', 'name' => rb::get('global.password'), 'validator' => 'data-fv-notempty', 'type' => 'password'), '');
+      modal::end(rb::get('global.login'));
     }
   }
 

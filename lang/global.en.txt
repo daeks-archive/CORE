@@ -16,5 +16,6 @@
   "invalid_login": "Login failed. Invalid credentials.",
   "beta" : "BETA",
   "lock" : "LOCKED",
-  "disabled" : "DISABLED"
+  "disabled" : "DISABLED",
+  "config" : "Configuration"
 }

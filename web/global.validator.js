@@ -78,13 +78,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         validator: validator
       }
     });
 
     $(function () {
-        core.validator.init();
+        global.validator.init();
     });
 
 }(jQuery));
