@@ -35,7 +35,7 @@ class config
     echo '<br>';
     echo '<div class="row">';
     echo '<div class="col-sm-12" id="panel" name="panel">';
-    if (network::get('module') != '') { 
+    if (network::get('module') != '') {
       foreach (module::read() as $key => $tmp) {
         if (isset($tmp->config)) {
           foreach ($tmp->config as $config) {
