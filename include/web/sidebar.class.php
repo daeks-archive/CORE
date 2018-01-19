@@ -59,10 +59,10 @@ class sidebar
         echo '<li>';
       }
     }
-    if (isset($options['disabled']) && $options['disabled'] != true) {
-      echo '<a href="'.$target.'">';
-    } else {
+    if (isset($options['disabled']) && $options['disabled'] == true) {
       echo '<a href="#">';
+    } else {
+      echo '<a href="'.$target.'">';
     }
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
@@ -135,10 +135,10 @@ class sidebar
         echo '<li>';
       }
     }
-    if (isset($options['disabled']) && $options['disabled'] != true) {
-      echo '<a href="'.$target.'">';
-    } else {
+    if (isset($options['disabled']) && $options['disabled'] == true) {
       echo '<a href="#">';
+    } else {
+      echo '<a href="'.$target.'">';
     }
     if (isset($options['icon']) && $options['icon'] != '') {
       echo '<i class="fa fa-'.$options['icon'].' fa-fw"></i> ';
