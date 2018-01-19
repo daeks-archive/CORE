@@ -6,7 +6,7 @@ PHP, JQuery and Bootstrap based framework for web applications
 
 - Download Framework and place it into a subdirectory below your project
 - Integrate ```common.php``` into your project
-- Schedule cron job for ```cron/index.php```
+- Schedule cron job for ```<url>/?cron```
 
 # Example
 

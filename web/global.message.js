@@ -32,13 +32,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         message: message
       }
     });
 
     $(function () {
-        core.message.init();
+        global.message.init();
     });
 
 }(jQuery));

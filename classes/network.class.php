@@ -54,6 +54,11 @@ class network
       return '';
     }
   }
+  
+  public static function convert($path)
+  {
+    return str_replace(DIRECTORY_SEPARATOR, URL_SEPARATOR, str_replace(BASE.DIRECTORY_SEPARATOR, '', $path));
+  }
 
   public static function ping($url)
   {

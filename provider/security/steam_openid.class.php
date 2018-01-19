@@ -9,7 +9,7 @@
       } else {
         $_SERVER['REQUEST_URI'] .= '&security-login';
       }
-      echo '<a href="'.$_SERVER['REQUEST_URI'].'" type="_self"><button type="button" class="btn btn-success" style="margin-top: 7px; margin-right: 5px">'.rb::get('core.login_with', array('<span class="fa navbar-fa fa-steam-square" aria-hidden="true"></span>', 'STEAM')).'</button></a>';
+      echo '<a href="'.$_SERVER['REQUEST_URI'].'" type="_self"><button type="button" class="btn btn-success" style="margin-top: 7px; margin-right: 5px">'.rb::get('global.login_with', array('<span class="fa navbar-fa fa-steam-square" aria-hidden="true"></span>', 'STEAM')).'</button></a>';
     }
     
     public static function authenticate()

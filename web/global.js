@@ -1,20 +1,14 @@
 (function ($) {
     
-    var core = (function () {
+    var global = (function () {
 
       var init = function () {
-        var scripts= document.getElementsByTagName('script'),
-        path = scripts[0].src.split('?')[0],
-        curpath = path.split('/').slice(0, -1).join('/')+'/',
-        webpath = curpath.split('/').slice(0, -2).join('/')+'/';
-        cfxpath = webpath.split('/').slice(0, -2).join('/')+'/';
-      
-        $.get(cfxpath+'setup/controller.php?action=init', function (data) {
+        $.get('?setup&type=controller&action=init', function (data) {
           try {
             var obj = $.parseJSON(data);
             if (obj.status == 200) {
               if (obj.data > 0) {
-                $('.modal-content').load(cfxpath+'setup/dialog.php?action=setup',function (result) {
+                $('.modal-content').load('?setup&type=dialog&action=setup',function (result) {
                   $('.modal').modal({
                     show:true,
                     backdrop: 'static',
@@ -32,12 +26,12 @@
                 });
               }
             } else if (obj.status == 500) {
-              core.toast('danger', false, obj.data);
+              global.toast('danger', false, obj.data);
             } else {
-              core.toast('danger', true, obj.data);
+              global.toast('danger', true, obj.data);
             }
           } catch (e) {
-            core.infobox('danger', 0, e.message + data);
+            global.infobox('danger', 0, e.message + data);
           }
         });
       };
@@ -74,11 +68,11 @@
     })();
 
     $.extend(true, window, {
-      core: core
+      global: global
     });
 
     $(function () {
-        core.init();
+        global.init();
     });
 
 }(jQuery));

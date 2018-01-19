@@ -21,16 +21,16 @@
               if (obj.status == 200) {
                 params.success({total: obj.total, rows: $.parseJSON(obj.data)});
               } else if (obj.status == 401) {
-                core.message.infobox('danger', false, obj.data);
+                global.message.infobox('danger', false, obj.data);
                 params.error({status: 401});
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.infobox('danger', 0, obj.data);
+                global.message.infobox('danger', 0, obj.data);
                 params.error({status: obj.status});
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + data);
+              global.message.infobox('danger', 0, e.message + data);
               params.error({status: 500});
             }
           });
@@ -44,13 +44,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         table: table
       }
     });
 
     $(function () {
-        core.table.init();
+        global.table.init();
     });
 
 }(jQuery));

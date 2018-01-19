@@ -7,14 +7,14 @@
       var init = function () {
         $(document).ajaxSend(function (event, request, settings) {
           $('#loading').removeClass('hidden');
-          core.async.time[btoa(settings.url)] = new Date().getTime();
+          global.async.time[btoa(settings.url)] = new Date().getTime();
         });
 
         $(document).ajaxComplete(function (event, request, settings) {
           $('#loading').addClass('hidden');
-          core.async.time[btoa(settings.url)] = (new Date().getTime() - core.async.time[btoa(settings.url)]) / 1000;
-          $('#async').html($('#async').html().replace('{2}', core.async.time[btoa(settings.url)]));
-          delete core.async.time[btoa(settings.url)];
+          global.async.time[btoa(settings.url)] = (new Date().getTime() - global.async.time[btoa(settings.url)]) / 1000;
+          $('#async').html($('#async').html().replace('{2}', global.async.time[btoa(settings.url)]));
+          delete global.async.time[btoa(settings.url)];
         });
       
         $(document.body).on('click', '[data-toggle="async"]', function (e) {
@@ -27,23 +27,22 @@
               if (obj.status == 200) {
                 if (obj.event.length > 0) {
                   if (obj.data.length > 0) {
-                    core.message.toast('success', false, obj.data);
+                    global.message.toast('success', false, obj.data);
                   }
                   eval(obj.event);
                 } else {
                   var data = $('<textarea/>').html(obj.data).val();
                   target.html(data);
-                  core.validator.init();
-                  core.form.init();
-                  core.proxy.init();
+                  global.validator.init();
+                  global.form.init();
                 }
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.toast('danger', true, obj.data);
+                global.message.toast('danger', true, obj.data);
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + '<br>' + data);
+              global.message.infobox('danger', 0, e.message + '<br>' + data);
             }
           });
           $('.dropdown.open .dropdown-toggle').dropdown('toggle');
@@ -64,23 +63,22 @@
               if (obj.status == 200) {
                 if (obj.event.length > 0) {
                   if (obj.data.length > 0) {
-                    core.message.toast('success', false, obj.data);
+                    global.message.toast('success', false, obj.data);
                   }
                   eval(obj.event);
                 } else {
                   var data = $('<textarea/>').html(obj.data).val();
                   target.html(data);
-                  core.validator.init();
-                  core.form.init();
-                  core.proxy.init();
+                  global.validator.init();
+                  global.form.init();
                 }
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.toast('danger', true, obj.data);
+                global.message.toast('danger', true, obj.data);
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + '<br>' + data);
+              global.message.infobox('danger', 0, e.message + '<br>' + data);
             }
           });
           return false;
@@ -96,23 +94,22 @@
               if (obj.status == 200) {
                 if (obj.event.length > 0) {
                   if (obj.data.length > 0) {
-                    core.message.toast('success', false, obj.data);
+                    global.message.toast('success', false, obj.data);
                   }
                   eval(obj.event);
                 } else {
                   var data = $('<textarea/>').html(obj.data).val();
                   target.html(data);
-                  core.validator.init();
-                  core.form.init();
-                  core.proxy.init();
+                  global.validator.init();
+                  global.form.init();
                 }
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.toast('danger', true, obj.data);
+                global.message.toast('danger', true, obj.data);
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + '<br>' + data);
+              global.message.infobox('danger', 0, e.message + '<br>' + data);
             }
           });
           return false;
@@ -128,7 +125,7 @@
               if (obj.status == 200) {
                 if (obj.event.length > 0) {
                   if (obj.data.length > 0) {
-                    core.message.toast('success', false, obj.data);
+                    global.message.toast('success', false, obj.data);
                   }
                   eval(obj.event);
                 } else {
@@ -136,12 +133,12 @@
                   target.html(data);
                 }
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.toast('danger', true, obj.data);
+                global.message.toast('danger', true, obj.data);
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + '<br>' + data);
+              global.message.infobox('danger', 0, e.message + '<br>' + data);
             }
             $('button[data-validate="post"]').prop('disabled', true);
           });
@@ -171,7 +168,7 @@
               if (obj.status == 200) {
                 if (obj.event.length > 0) {
                   if (obj.data.length > 0) {
-                    core.message.toast('success', false, obj.data);
+                    global.message.toast('success', false, obj.data);
                   }
                   eval(obj.event);
                 } else {
@@ -179,12 +176,12 @@
                   target.html(data);
                 }
               } else if (obj.status == 500) {
-                core.message.toast('danger', false, obj.data);
+                global.message.toast('danger', false, obj.data);
               } else {
-                core.message.toast('danger', true, obj.data);
+                global.message.toast('danger', true, obj.data);
               }
             } catch (e) {
-              core.message.infobox('danger', 0, e.message + '<br>' + data);
+              global.message.infobox('danger', 0, e.message + '<br>' + data);
             }
             $('button[data-validate="form"]').prop('disabled', true);
           });
@@ -199,13 +196,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         async: async
       }
     });
 
     $(function () {
-        core.async.init();
+        global.async.init();
     });
 
 }(jQuery));

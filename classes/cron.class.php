@@ -6,6 +6,15 @@ class cron extends cronlib
   private static $format = 'd.M.Y - H:i:s';
   private static $offset = 100;
   
+  public static function construct()
+  {
+    header('Content-Type: text/plain');
+    foreach (module::read() as $key => $module) {
+      cron::check($module, $module->path);
+    }
+    die('');
+  }
+  
   public static function next($schedule = '* * * * *', $time = null)
   {
     return self::get($schedule, 0, $time);

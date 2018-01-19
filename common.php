@@ -18,7 +18,7 @@
       define('CONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', BASE)));
       define('CFX', dirname(realpath(__FILE__)));
       define('CFXCONTEXT', str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', CFX)));
-      define('CORE', CFX.DIRECTORY_SEPARATOR.'include');
+      define('CLASSES', CFX.DIRECTORY_SEPARATOR.'classes');
       define('WEB', CFX.DIRECTORY_SEPARATOR.'web');
       define('PROVIDER', CFX.DIRECTORY_SEPARATOR.'provider');
       define('LANG', CFX.DIRECTORY_SEPARATOR.'lang');
@@ -32,9 +32,9 @@
             
       define('URL_SEPARATOR', '/');
      
-      common::load(CORE.DIRECTORY_SEPARATOR.'libs');
+      common::load(CLASSES.DIRECTORY_SEPARATOR.'vendor');
       common::load(PROVIDER, true);
-      common::load(CORE, true);
+      common::load(CLASSES, true);
       foreach (module::read(false) as $key => $module) {
         common::load($module->path);
       }

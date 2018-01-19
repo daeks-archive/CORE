@@ -129,12 +129,21 @@ class topbar
       echo '<li role="separator" class="divider"></li>';
     }
     
+    $target = $_SERVER['REQUEST_URI'];
     if (strlen($_SERVER['QUERY_STRING']) == 0) {
-      $_SERVER['REQUEST_URI'] .= '?security-logout';
+      $target .= '?config';
     } else {
-      $_SERVER['REQUEST_URI'] .= '&security-logout';
+      $target .= '&config';
     }
-    echo '<li><a href="'.$_SERVER['REQUEST_URI'].'"><span class="fa navbar-fa fa-sign-out" aria-hidden="true"></span> '.rb::get('core.logout').'</a></li>';
+    echo '<li><a href="'.$target.'"><span class="fa navbar-fa fa-gear" aria-hidden="true"></span> '.rb::get('global.config').'</a></li>';
+    
+    $target = $_SERVER['REQUEST_URI'];
+    if (strlen($_SERVER['QUERY_STRING']) == 0) {
+      $target .= '?security-logout';
+    } else {
+      $target .= '&security-logout';
+    }
+    echo '<li><a href="'.$target.'"><span class="fa navbar-fa fa-sign-out" aria-hidden="true"></span> '.rb::get('global.logout').'</a></li>';
     echo '</ul>';
     echo '</div>';
   }

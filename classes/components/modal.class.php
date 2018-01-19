@@ -16,7 +16,7 @@ class modal
     echo '</fieldset></form>';
     echo '</div>';
     echo '<div class="modal-footer">';
-    echo '<button type="button" class="btn btn-default" data-dismiss="modal">'.rb::get('core.close').'</button>';
+    echo '<button type="button" class="btn btn-default" data-dismiss="modal">'.rb::get('global.close').'</button>';
     if ($title != null) {
       echo '<button data-query="'.$target.'" data-validate="modal" class="btn btn-'.$color.'" type="submit">'.$title.'</button>';
     }

@@ -13,13 +13,13 @@
     })();
 
     $.extend(true, window, {
-      core: {
+      global: {
         sidebar: sidebar
       }
     });
 
     $(function () {
-        core.sidebar.init();
+        global.sidebar.init();
     });
 
 }(jQuery));

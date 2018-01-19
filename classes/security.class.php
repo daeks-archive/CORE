@@ -31,7 +31,7 @@
               user::construct($id);
               security::redirect('security-login');
             } else {
-              die(network::error(rb::get('core.invalid_login')));
+              die(network::error(rb::get('global.invalid_login')));
             }
           }
         }

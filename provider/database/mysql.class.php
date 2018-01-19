@@ -57,7 +57,7 @@ class mysql implements database_interface
   
   public function read($table, $fields = '*', $conditions = null, $options = array())
   {
-    $query = 'SELECT '.$fields.' FROM `'.TABLE_PREFIX.$table.'`';
+    $query = 'SELECT '.$fields.' FROM `'.common::constant('TABLE_PREFIX').$table.'`';
     if ($conditions != null) {
       $query .= ' WHERE '.$conditions;
     }
@@ -87,13 +87,13 @@ class mysql implements database_interface
   public function write($table, $data, $conditions = null)
   {
     if ($conditions != null) {
-      if ($this->query('SELECT * FROM `'.TABLE_PREFIX.$table.'` WHERE '.$conditions)->rowCount() > 0) {
+      if ($this->query('SELECT * FROM `'.common::constant('TABLE_PREFIX').$table.'` WHERE '.$conditions)->rowCount() > 0) {
         $fields = '';
         foreach ($data as $key => $value) {
           $fields .= $key.'=?,';
         }
       
-        $query = 'UPDATE `'.TABLE_PREFIX.$table.'` SET '.rtrim($fields, ',');
+        $query = 'UPDATE `'.common::constant('TABLE_PREFIX').$table.'` SET '.rtrim($fields, ',');
         if ($conditions != null) {
           $query .= ' WHERE '.$conditions;
         }
@@ -106,7 +106,7 @@ class mysql implements database_interface
           array_push($keys, '`'.$key.'`');
         }
         
-        $query = 'INSERT INTO `'.TABLE_PREFIX.$table.'` ('.implode(',', $keys).') VALUES ('.rtrim($fields, ',').')';
+        $query = 'INSERT INTO `'.common::constant('TABLE_PREFIX').$table.'` ('.implode(',', $keys).') VALUES ('.rtrim($fields, ',').')';
         return $this->query($query, array_values($data));
       }
     } else {
@@ -117,7 +117,7 @@ class mysql implements database_interface
         array_push($keys, '`'.$key.'`');
       }
       
-      $query = 'INSERT INTO `'.TABLE_PREFIX.$table.'` ('.implode(',', $keys).') VALUES ('.rtrim($fields, ',').')';
+      $query = 'INSERT INTO `'.common::constant('TABLE_PREFIX').$table.'` ('.implode(',', $keys).') VALUES ('.rtrim($fields, ',').')';
       return $this->query($query, array_values($data));
     }
   }
@@ -125,16 +125,16 @@ class mysql implements database_interface
   public function delete($table, $conditions = null)
   {
     if ($conditions != null) {
-      return $this->query('DELETE FROM `'.TABLE_PREFIX.$table.'` WHERE '.$conditions);
+      return $this->query('DELETE FROM `'.common::constant('TABLE_PREFIX').$table.'` WHERE '.$conditions);
     } else {
-      return $this->query('DELETE FROM `'.TABLE_PREFIX.$table.'`');
+      return $this->query('DELETE FROM `'.common::constant('TABLE_PREFIX').$table.'`');
     }
   }
   
   public function setup($schema)
   {
     if (!$this->exists('schema')) {
-      $this->query('CREATE TABLE `'.TABLE_PREFIX.'schema` ( `ID` INT NOT NULL AUTO_INCREMENT , `NAME` VARCHAR(255) NOT NULL , `VERSION` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = MyISAM');
+      $this->query('CREATE TABLE `'.common::constant('TABLE_PREFIX').'schema` ( `ID` INT NOT NULL AUTO_INCREMENT , `NAME` VARCHAR(255) NOT NULL , `VERSION` INT NOT NULL , PRIMARY KEY (`ID`)) ENGINE = MyISAM');
     }
     
     $array = json_decode(file_get_contents($schema), true);
@@ -153,10 +153,10 @@ class mysql implements database_interface
                   $primarykey = ', PRIMARY KEY (`'.strtoupper($item['name']).'`)';
                 }
               }
-              $stmt = $this->query('CREATE TABLE `'.TABLE_PREFIX.$name.'` ('.implode(',', $columns).$primarykey.') ENGINE = '.$array['engine']);
+              $stmt = $this->query('CREATE TABLE `'.common::constant('TABLE_PREFIX').$name.'` ('.implode(',', $columns).$primarykey.') ENGINE = '.$array['engine']);
               if (isset($array['index'])) {
                 foreach ($array['index'] as $item) {
-                  $stmt = $this->query('ALTER TABLE `'.TABLE_PREFIX.$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
+                  $stmt = $this->query('ALTER TABLE `'.common::constant('TABLE_PREFIX').$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
                 }
               }
             }
@@ -174,7 +174,7 @@ class mysql implements database_interface
             foreach (explode(' ', $array['type']) as $type) {
               switch ($type) {
                 case 'recreate':
-                  $stmt = $this->query('DROP TABLE `'.TABLE_PREFIX.$name.'`');
+                  $stmt = $this->query('DROP TABLE `'.common::constant('TABLE_PREFIX').$name.'`');
                   if (isset($array['schema'])) {
                     $columns = array();
                     $primarykey = '';
@@ -184,21 +184,21 @@ class mysql implements database_interface
                         $primarykey = ', PRIMARY KEY (`'.strtoupper($item['name']).'`)';
                       }
                     }
-                    $stmt = $this->query('CREATE TABLE `'.TABLE_PREFIX.$name.'` ('.implode(',', $columns).$primarykey.') ENGINE = '.$array['engine']);
+                    $stmt = $this->query('CREATE TABLE `'.common::constant('TABLE_PREFIX').$name.'` ('.implode(',', $columns).$primarykey.') ENGINE = '.$array['engine']);
                     if (isset($array['index'])) {
                       foreach ($array['index'] as $item) {
-                        $stmt = $this->query('ALTER TABLE `'.TABLE_PREFIX.$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
+                        $stmt = $this->query('ALTER TABLE `'.common::constant('TABLE_PREFIX').$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
                       }
                     }
                   }
                   break;
                 case 'alter':
                   $fields = array();
-                  foreach ($this->query('desc `'.TABLE_PREFIX.$name.'`')->fetchAll() as $item) {
+                  foreach ($this->query('desc `'.common::constant('TABLE_PREFIX').$name.'`')->fetchAll() as $item) {
                     array_push($fields, strtoupper($item['Field']));
                   }
                   $indexes = array();
-                  foreach ($this->query('SHOW INDEX FROM `'.TABLE_PREFIX.$name.'`')->fetchAll() as $item) {
+                  foreach ($this->query('SHOW INDEX FROM `'.common::constant('TABLE_PREFIX').$name.'`')->fetchAll() as $item) {
                     if (strtoupper($item['Key_name']) != 'PRIMARY' && !in_array($item['Key_name'], $indexes)) {
                       array_push($indexes, $item['Key_name']);
                     }
@@ -207,26 +207,26 @@ class mysql implements database_interface
                   if (isset($array['schema'])) {
                     foreach ($array['schema'] as $item) {
                       if (!in_array(strtoupper($item['name']), $fields)) {
-                        $stmt = $this->handle->exec('ALTER TABLE `'.TABLE_PREFIX.$name.'` ADD `'.strtoupper($item['name']).'` '.strtoupper($item['type']).';');
+                        $stmt = $this->handle->exec('ALTER TABLE `'.common::constant('TABLE_PREFIX').$name.'` ADD `'.strtoupper($item['name']).'` '.strtoupper($item['type']).';');
                       } else {
                         unset($fields[array_search(strtoupper($item['name']), $fields)]);
                       }
                     }
                     foreach ($indexes as $key => $index) {
-                      $stmt = $this->handle->exec('ALTER TABLE `'.TABLE_PREFIX.$name.'` DROP INDEX `'.$index.'`');
+                      $stmt = $this->handle->exec('ALTER TABLE `'.common::constant('TABLE_PREFIX').$name.'` DROP INDEX `'.$index.'`');
                     }
                     if (isset($array['index'])) {
                       foreach ($array['index'] as $item) {
-                        $stmt = $this->query('ALTER TABLE `'.TABLE_PREFIX.$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
+                        $stmt = $this->query('ALTER TABLE `'.common::constant('TABLE_PREFIX').$name.'` ADD INDEX `'.$item['name'].'` ('.implode(',', $item['schema']).')');
                       }
                     }
                   }
                   break;
                 case 'truncate':
-                  $stmt = $this->query('TRUNCATE `'.TABLE_PREFIX.$name.'`');
+                  $stmt = $this->query('TRUNCATE `'.common::constant('TABLE_PREFIX').$name.'`');
                   break;
                 case 'drop':
-                  $stmt = $this->query('DROP TABLE `'.TABLE_PREFIX.$name.'`');
+                  $stmt = $this->query('DROP TABLE `'.common::constant('TABLE_PREFIX').$name.'`');
                   break;
                 default:
                   break;
@@ -252,7 +252,7 @@ class mysql implements database_interface
   {
     $result = false;
     try {
-        $result = $this->query('SELECT 1 FROM '.TABLE_PREFIX.$name);
+        $result = $this->query('SELECT 1 FROM '.common::constant('TABLE_PREFIX').$name);
     } catch (Exception $e) {
         return $result;
     }

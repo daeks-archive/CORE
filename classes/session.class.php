@@ -19,6 +19,15 @@ class session
     if (isset($_GET['security-logout'])) {
       security::logout();
     }
+    if (isset($_GET['cron'])) {
+      cron::construct();
+    }
+    if (isset($_GET['config'])) {
+      config::construct();
+    }
+    if (isset($_GET['setup'])) {
+      setup::construct();
+    }
   }
   
   public static function destroy()
